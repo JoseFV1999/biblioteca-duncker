@@ -9,26 +9,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Mostrando asignaturas</h1>
-    
-    <table class="table">
-        <thead>
-            <tr>
-            <th>Nombre</th>
-            <th>Abreviacion</th>
-            </tr>
-        </thead>
-        <tbody>
-        @forelse ($asignaturas as $asignatura)
-            <tr>
-                <td>{{ $asignatura->nombre }}</td>
-                <td>{{ $asignatura->abreviacion }}</td>
-            </tr>
-        @empty
-            <li>Sin datos</li>
-        @endforelse
-        </tbody>
-    </table>
-
+    <h1>Bienvenido a la biblioteca de la Duncker</h1>
+    <a href="/asignaturas" class="button">Asignaturas</a>
+    <a href="/libros" class="button">Libros</a>
 </body>
 </html>

@@ -18,12 +18,12 @@ class LibroFactory extends Factory
     {
         return [
             //
-            'codigo' => $this -> faker() -> regexify('[A-Z]{2}[0-9]{3}'),
-            'titulo' => $this -> faker() -> sentence(3),
-            'autor' => $this -> faker() -> firstName($gender = null|'male'|'female'),
-            'year' => $this -> faker() -> randomNumber(4, true),
-            'mueble' => $this -> faker() -> regexify('[A-Z]{2}[0-9]{1}'),
-            'observacion' => $this -> faker() -> randomKey(['C' => 1, 'O' => 2]),
+            'codigo' => $this -> faker -> regexify('[A-Z]{4}-[0-9]{4}'),
+            'titulo' => $this -> faker -> sentence(3),
+            'autor' => $this -> faker -> name($gender = 'male'|'female'),
+            'year' => $this -> faker -> year($max = 'now'),
+            'mueble' => $this -> faker -> regexify('[A-Z]{1}[0-9]{2}'),
+            'observacion' => $this -> faker -> randomKey(['C' => 1, 'O' => 2]),
             'asignatura_id' => Asignatura::inRandomOrder()->first()->id,
         ];
     }

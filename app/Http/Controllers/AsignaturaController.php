@@ -17,7 +17,7 @@ class AsignaturaController extends Controller
         //
         $duncker_asignaturas = Asignatura::all();
         //dd($duncker_asignaturas);
-        return view("index",["asignaturas"=>$duncker_asignaturas]);
+        return view("asignatura",["asignaturas"=>$duncker_asignaturas]);
     }
 
     /**
@@ -28,6 +28,8 @@ class AsignaturaController extends Controller
     public function create()
     {
         //
+        $duncker_asignaturas = Asignatura::all();
+        return view('create_asignatura',["asignaturas"=>$duncker_asignaturas]);
     }
 
     /**
@@ -39,6 +41,12 @@ class AsignaturaController extends Controller
     public function store(Request $request)
     {
         //
+        $asignatura = new Asignatura;
+        $asignatura->nombre = $request->nombre_asignatura;
+        $asignatura->abreviacion = $request->abreviacion_asignatura;
+        $asignatura->save();
+
+        return redirect()->route('Asignaturas');
     }
 
     /**

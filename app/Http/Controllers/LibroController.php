@@ -15,6 +15,9 @@ class LibroController extends Controller
     public function index()
     {
         //
+        $duncker_libros = Libro::all();
+        //dd($duncker_asignaturas);
+        return view("libros",["libros"=>$duncker_libros]);
     }
 
     /**
