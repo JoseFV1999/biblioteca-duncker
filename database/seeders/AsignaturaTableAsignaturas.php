@@ -16,9 +16,9 @@ class AsignaturaTableAsignaturas extends Seeder
     public function run()
     {
         //
-        $asignatura1 = new Asignatura;
-        $asignatura1->nombre = "Partitura";
-        $asignatura1->abreviacion = 'PART';
-        $asignatura1->save();
+        //$asignatura1 = new Asignatura;
+        //$asignatura1->nombre = "Partitura";
+        //$asignatura1->abreviacion = 'PART';
+        //$asignatura1->save();
     }
 }
