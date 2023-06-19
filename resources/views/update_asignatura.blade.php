@@ -10,12 +10,12 @@
 <body>
     <h1>Formulario para asignatura</h1>
 
-    <form action="{{ route('createAsignatura') }}" method="POST">
+    <form action="{{ route('updateAsignatura') }}" method="POST">
 
         @csrf
-
-        <input type="text" placeholder="Nombre de la asignatura" name="nombre_asignatura">
-        <input type="text" placeholder="Abreviacion de la asignatura" name='abreviacion_asignatura'>
+        <input type="hidden" name="id" value="{{ $asignatura->id }}">
+        <input type="text" placeholder="Nombre de la asignatura" name="nombre_asignatura" value="{{ $asignatura->nombre }}">
+        <input type="text" placeholder="Abreviacion de la asignatura" name='abreviacion_asignatura' value="{{ $asignatura->abreviacion }}">
         <input type="submit" value="Completar">
         <a href="{{ URL::route('Asignaturas') }}" class="button">Cancelar</a>
     </form>

@@ -28,8 +28,8 @@ class AsignaturaController extends Controller
     public function create()
     {
         //
-        $duncker_asignaturas = Asignatura::all();
-        return view('create_asignatura',["asignaturas"=>$duncker_asignaturas]);
+        //$duncker_asignaturas = Asignatura::all();
+        return view('create_asignatura');
     }
 
     /**
@@ -46,6 +46,20 @@ class AsignaturaController extends Controller
         $asignatura->abreviacion = $request->abreviacion_asignatura;
         $asignatura->save();
 
+        return redirect()->route('Asignaturas');
+    }
+
+    public function view($asignatura_id) {
+        $asignatura = Asignatura::find($asignatura_id);
+        return view('update_asignatura', ['asignatura'=>$asignatura]);
+    }
+
+    public function update(Request $request)
+    {
+        $asignatura = Asignatura::find($request->id);
+        $asignatura->nombre = $request->nombre_asignatura;
+        $asignatura->abreviacion = $request->abreviacion_asignatura;
+        $asignatura->save();
         return redirect()->route('Asignaturas');
     }
 
@@ -78,10 +92,10 @@ class AsignaturaController extends Controller
      * @param  \App\Models\Asignatura  $asignatura
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Asignatura $asignatura)
-    {
+    //public function update(Request $request, Asignatura $asignatura)
+    //{
         //
-    }
+    //}
 
     /**
      * Remove the specified resource from storage.

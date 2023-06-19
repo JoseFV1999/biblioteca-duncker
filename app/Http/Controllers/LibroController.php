@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Libro;
 use Illuminate\Http\Request;
+use App\Models\Asignatura;
 
 class LibroController extends Controller
 {
@@ -28,6 +29,8 @@ class LibroController extends Controller
     public function create()
     {
         //
+        $duncker_asignaturas = Asignatura::all();
+        return view('create_libro',['asignaturas'=>$duncker_asignaturas]);
     }
 
     /**
@@ -39,6 +42,16 @@ class LibroController extends Controller
     public function store(Request $request)
     {
         //
+        $libro = new Libro;
+        $libro->codigo = $request->codigo_libro;
+        $libro->titulo = $request->titulo_libro;
+        $libro->autor = $request->autor_libro;
+        $libro->year = $request->year_libro;
+        $libro->mueble = $request->mueble_libro;
+        $libro->observacion = $request->observacion_libro;
+        $libro->asignatura_id = $request->asignatura_libro;
+        $libro->save();
+        return redirect()->route('Libros');
     }
 
     /**

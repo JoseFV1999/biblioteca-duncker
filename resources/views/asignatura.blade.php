@@ -23,11 +23,15 @@
                 <td>{{ $asignatura->id }}</td>
                 <td>{{ $asignatura->nombre }}</td>
                 <td>{{ $asignatura->abreviacion }}</td>
+                <td><a href="{{ route('viewEditAsignatura', $asignatura->id) }}">Editar</a></td>
             </tr>
         @empty
             <li>Sin datos</li>
         @endforelse
         </tbody>
     </table>
+
+    <a href="{{ URL::route('viewCreateAsignatura') }}" class="button">Añadir asignatura</a>
+
 </body>
 </html>
