@@ -41,7 +41,16 @@ class AsignaturaController extends Controller
     public function store(Request $request)
     {
         //
+        $lastId = Asignatura::max('id');
+        $nextId = $lastId + 1;
+
+        $request->validate([
+            'nombre_asignatura'=>'required',
+            'abreviacion_asignatura'=>'required',
+        ]);
+
         $asignatura = new Asignatura;
+        $asignatura->id = $nextId;
         $asignatura->nombre = $request->nombre_asignatura;
         $asignatura->abreviacion = $request->abreviacion_asignatura;
         $asignatura->save();
@@ -62,6 +71,14 @@ class AsignaturaController extends Controller
         $asignatura->save();
         return redirect()->route('Asignaturas');
     }
+
+    public function delete($asignatura_id)
+    {
+        $asignatura = Asignatura::find($asignatura_id);
+        $asignatura-> delete();
+        return redirect()->route('Asignaturas');
+    }
+
 
     /**
      * Display the specified resource.
@@ -106,5 +123,6 @@ class AsignaturaController extends Controller
     public function destroy(Asignatura $asignatura)
     {
         //
+        
     }
 }

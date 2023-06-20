@@ -3,7 +3,7 @@
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\AsignaturaController;
 use Illuminate\Support\Facades\Route;
-
+use App\Events\MessageSent;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,8 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::post('/message', function () {
+    $message = request()->input('message');
+    event(new MessageSent($message));
 });
 
 Route::get('/index', function () {
@@ -39,8 +46,11 @@ Route::post('/asignaturas/storeAsignatura', [AsignaturaController::class, 'store
 //Ruta para dirigirse a la vista de la Asignatura seleccionada
 Route::get('/asignaturas/{asignatura_id}', [AsignaturaController::class, 'view'])->name('viewEditAsignatura');
 
-//Actualozar Asignatura
+//Modificar Asignatura
 Route::post('/asignaturas/updateAsignatura', [AsignaturaController::class, 'update'])->name('updateAsignatura');
+
+//Eliminar Asignatura
+Route::delete('/asignaturas/deleteAsignatura/{asignatura_id}', [AsignaturaController::class, 'delete'])->name('deleteAsignatura');
 
 //
 // RUTAS PARA LIBROS
@@ -54,3 +64,9 @@ Route::get('/libros/create', [LibroController::class,'create'])->name('viewCreat
 
 //Crear nuevo Libro
 Route::post('/libros/storeLibro', [LibroController::class, 'store'])->name('createLibro');
+
+//Modificar Libro
+Route::post('/libros/updateLibro', [LibroController::class, 'update'])->name('updateLibro');
+
+//Eliminar Libro
+Route::delete('/asignaturas/deleteLibro/{libro_id}', [LibroController::class, 'delete'])->name('deleteLibro');

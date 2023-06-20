@@ -17,8 +17,9 @@ class LibroController extends Controller
     {
         //
         $duncker_libros = Libro::all();
+        $duncker_asignaturas = Asignatura::all();
         //dd($duncker_asignaturas);
-        return view("libros",["libros"=>$duncker_libros]);
+        return view("libros",["libros"=>$duncker_libros,"asignaturas"=>$duncker_asignaturas]);
     }
 
     /**
@@ -42,7 +43,11 @@ class LibroController extends Controller
     public function store(Request $request)
     {
         //
+        $lastId = Libro::max('id');
+        $nextId = $lastId + 1;
+
         $libro = new Libro;
+        $libro->id = $nextId;
         $libro->codigo = $request->codigo_libro;
         $libro->titulo = $request->titulo_libro;
         $libro->autor = $request->autor_libro;
@@ -51,6 +56,28 @@ class LibroController extends Controller
         $libro->observacion = $request->observacion_libro;
         $libro->asignatura_id = $request->asignatura_libro;
         $libro->save();
+        return redirect()->route('Libros');
+    }
+
+    public function update(Request $request)
+    {
+        //
+        $libro = Libro::find($request->id);
+        $libro->codigo = $request->codigo_libro;
+        $libro->titulo = $request->titulo_libro;
+        $libro->autor = $request->autor_libro;
+        $libro->year = $request->year_libro;
+        $libro->mueble = $request->mueble_libro;
+        $libro->observacion = $request->observacion_libro;
+        $libro->asignatura_id = $request->asignatura_libro;
+        $libro->save();
+        return redirect()->route('Libros');
+    }
+
+    public function delete($libro_id)
+    {
+        $libro = Libro::find($libro_id);
+        $libro-> delete();
         return redirect()->route('Libros');
     }
 
@@ -83,10 +110,10 @@ class LibroController extends Controller
      * @param  \App\Models\Libro  $libro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Libro $libro)
-    {
-        //
-    }
+    // public function update(Request $request, Libro $libro)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.

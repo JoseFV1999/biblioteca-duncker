@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Libro extends Model
 {
     use HasFactory;
-    
+    public $timestamps = false;
+
     protected $fillable = [
         'codigo',
         'titulo',
@@ -18,5 +19,10 @@ class Libro extends Model
         'observacion',
         'asignatura_id'
     ];
+
+    public function asignatura_libro()
+    {
+        return $this->hasOne(Asignatura::class, 'id', 'asignatura_id');
+    }
 
 }

@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('asignaturas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 20);
-            $table->string('abreviacion', 5);  
-            $table->timestamps();
+            $table->string('nombre', 30);
+            $table->string('abreviacion', 15);  
+            //$table->timestamps();
         });
     }
 

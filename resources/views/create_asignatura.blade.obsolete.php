@@ -15,7 +15,13 @@
         @csrf
 
         <input type="text" placeholder="Nombre de la asignatura" name="nombre_asignatura">
+        @error('nombre_asignatura')
+            {{ 'Se requiere un nombre' }}
+        @enderror
         <input type="text" placeholder="Abreviacion de la asignatura" name='abreviacion_asignatura'>
+        @error('abreviacion_asignatura')
+            {{ 'Se requiere una abreviacion' }}
+        @enderror
         <input type="submit" value="Completar">
         <a href="{{ URL::route('Asignaturas') }}" class="button">Cancelar</a>
     </form>
