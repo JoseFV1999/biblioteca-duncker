@@ -286,6 +286,7 @@
             </tbody>
         </table>
     </div>
+    {{ $libros->links() }}
 
 
 

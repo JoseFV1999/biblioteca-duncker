@@ -16,7 +16,7 @@ class LibroController extends Controller
     public function index()
     {
         //
-        $duncker_libros = Libro::all();
+        $duncker_libros = Libro::orderBy('id', 'asc')->paginate(10);
         $duncker_asignaturas = Asignatura::all();
         //dd($duncker_asignaturas);
         return view("libros",["libros"=>$duncker_libros,"asignaturas"=>$duncker_asignaturas]);

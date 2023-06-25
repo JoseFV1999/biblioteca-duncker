@@ -15,7 +15,7 @@ class AsignaturaController extends Controller
     public function index()
     {
         //
-        $duncker_asignaturas = Asignatura::all();
+        $duncker_asignaturas = Asignatura::orderBy('id', 'asc')->paginate(10);
         //dd($duncker_asignaturas);
         return view("asignatura",["asignaturas"=>$duncker_asignaturas]);
     }
