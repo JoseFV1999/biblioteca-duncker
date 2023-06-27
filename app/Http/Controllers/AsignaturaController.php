@@ -125,4 +125,18 @@ class AsignaturaController extends Controller
         //
         
     }
+
+    public function search(Request $request)
+    {
+        $data = Asignatura::whereRaw("LOWER(UNACCENT($request->tabla)) LIKE '%".strtolower($this->removeAccents($request->dato))."%'")->orderBy('id', 'asc')->paginate(10);
+
+        return view("asignatura", ["asignaturas" => $data]);
+    }
+
+    private function removeAccents($string)
+    {
+        return preg_replace('/[áÁ]/u', 'a', preg_replace('/[éÉ]/u', 'e', preg_replace('/[íÍ]/u', 'i', preg_replace('/[óÓ]/u', 'o', preg_replace('/[úÚüÜ]/u', 'u', $string)))));
+    }
+
+    
 }

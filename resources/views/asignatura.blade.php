@@ -58,21 +58,60 @@
                 Asignaturas
             </h2>
 
-            <div>
-                <button id="createAsignaturaButton" data-modal-toggle="createAsignaturaModal"
-                    class="text-sm text-white bg-green-600 border
-                    border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium
-                    rounded-lg px-3 py-1.5 dark:bg-green-500 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700
-                    dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                    type="button">
-                    Agregar
-                </button>
+            <div class="flex">
+                <div class="flex px-5">
+                    <form action="{{ route('searchAsignatura') }}" method="POST">
+                        @csrf
+                        <div class="flex">
+                            <select id="states" name="tabla"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg border-l-gray-100 dark:border-l-gray-700 border-l-2 focus:ring-blue-500 focus:border-blue-500 block w-[45%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option value="nombre" selected>Asignatura</option>
+                                <option value="abreviacion">Abreviación</option>
+                            </select>
+                            <div class="relative w-full">
+                                <input type="search" id="search-dropdown" name='dato'
+                                    class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                                    placeholder="Buscar">
+                                <button type="submit"
+                                    class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                    <span class="sr-only">Search</span>
+                                </button>
 
+                            </div>
+                        </div>
+                    </form>
+                    <a href="/asignaturas" class="mx-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30px" height="30px">
+                            <path
+                                d="M15,3C8.373,3,3,8.373,3,15c0,6.627,5.373,12,12,12s12-5.373,12-12C27,8.373,21.627,3,15,3z M16.414,15 c0,0,3.139,3.139,3.293,3.293c0.391,0.391,0.391,1.024,0,1.414c-0.391,0.391-1.024,0.391-1.414,0C18.139,19.554,15,16.414,15,16.414 s-3.139,3.139-3.293,3.293c-0.391,0.391-1.024,0.391-1.414,0c-0.391-0.391-0.391-1.024,0-1.414C10.446,18.139,13.586,15,13.586,15 s-3.139-3.139-3.293-3.293c-0.391-0.391-0.391-1.024,0-1.414c0.391-0.391,1.024-0.391,1.414,0C11.861,10.446,15,13.586,15,13.586 s3.139-3.139,3.293-3.293c0.391-0.391,1.024-0.391,1.414,0c0.391,0.391,0.391,1.024,0,1.414C19.554,11.861,16.414,15,16.414,15z" />
+                        </svg>
+                    </a>
+                </div>
+
+
+
+                <div class="">
+                    <button id="createAsignaturaButton" data-modal-toggle="createAsignaturaModal"
+                        class="text-sm text-white bg-green-600 border
+                        border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium
+                        rounded-lg px-3 py-1.5 dark:bg-green-500 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700
+                        dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                        type="button">
+                        Agregar
+                    </button>
+
+                </div>
             </div>
+
 
         </div>
 
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 table-fixed">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 table-fixed" id="miTabla">
 
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -184,8 +223,8 @@
                                                 <button type="button"
                                                     data-modal-toggle="modifyAsignaturaModal{{ $asignatura->id }}"
                                                     class="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                                                    <svg class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                                        xmlns="http://www.w3.org/2000/svg">
+                                                    <svg class="mr-1 -ml-1 w-5 h-5" fill="currentColor"
+                                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd"
                                                             d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
                                                             clip-rule="evenodd"></path>
@@ -260,6 +299,13 @@
 
     </div>
     {{ $asignaturas->links() }}
+    <script>
+        $(document).ready(function() {
+            $('#miTabla').DataTable({
+                searching: true // Habilitar la funcionalidad de búsqueda
+            });
+        });
+    </script>
 
     @include('asignaturasmodal')
 

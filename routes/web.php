@@ -52,6 +52,8 @@ Route::post('/asignaturas/updateAsignatura', [AsignaturaController::class, 'upda
 //Eliminar Asignatura
 Route::delete('/asignaturas/deleteAsignatura/{asignatura_id}', [AsignaturaController::class, 'delete'])->name('deleteAsignatura');
 
+Route::post('/asignaturas/search', [AsignaturaController::class, 'search'])->name('searchAsignatura');
+
 //
 // RUTAS PARA LIBROS
 //
@@ -70,3 +72,6 @@ Route::post('/libros/updateLibro', [LibroController::class, 'update'])->name('up
 
 //Eliminar Libro
 Route::delete('/asignaturas/deleteLibro/{libro_id}', [LibroController::class, 'delete'])->name('deleteLibro');
+
+// Buscar Libro
+Route::post('/libros/search', [LibroController::class, 'search'])->name('searchLibro');
